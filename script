@@ -1,0 +1,44 @@
+df <- read.csv("Data.csv")
+(df)
+summary(df) #Me doy cuenta que las respuestas categoricas no están como factores, modifico eso para dejarlos como factores
+#Creamos los datos 
+age<- c(df$age)
+age
+gender<- c(df$gender)
+gender
+income <-c(df$income)
+income
+kids <- c(df$kids)
+kids
+ownHome <- c(df$ownHome)
+ownHome
+subscribe <-c(df$subscribe) 
+subscribe
+Segment <-c(df$Segment) 
+Segment
+#Creamos los factores
+factor_gender <- factor(gender)
+plot(factor_gender)
+factor_own <- factor(ownHome)
+plot(factor_own)
+factor_subs <- factor(subscribe)
+plot(factor_subs)
+factor_seg <- factor(Segment)
+plot(factor_seg)
+#creamos la base de datos con los nuevos factores
+seg.df2 <- data.frame(age = age, gender = factor_gender, income = income, kids = kids, ownHome = factor_own, subscribe = factor_subs, Segment = factor_seg)
+seg.df2
+#comprobamos que grafique correctamente
+plot(seg.df2$subscribe)
+#Revisamos que muestre agrupado los factores
+summary(seg.df2)
+#Dejamos de nuevo los datos como deberian estar
+seg.df <- seg.df2
+#juguemos con diamantes
+require(ggplot2)
+ggplot(data = diamonds) + geom_bar(mapping = aes(x = cut, colour = cut)) #grises
+ggplot(data = diamonds) +  geom_bar(mapping = aes(x = cut, fill = cut)) #llenos de color según corte
+ggplot(data = diamonds) +   geom_bar(mapping = aes(x = cut, fill = clarity)) #Segun la claridad del corte
+ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) +  geom_bar(alpha = 1/5, position = "identity") #Esmumado superpuesto
+ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + geom_bar(fill = NA, position = "identity")# Superpuesto transparente
+ggplot(data = diamonds) + geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")# Agrupados por barras
