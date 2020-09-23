@@ -42,3 +42,14 @@ ggplot(data = diamonds) +   geom_bar(mapping = aes(x = cut, fill = clarity)) #Se
 ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) +  geom_bar(alpha = 1/5, position = "identity") #Esmumado superpuesto
 ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + geom_bar(fill = NA, position = "identity")# Superpuesto transparente
 ggplot(data = diamonds) + geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")# Agrupados por barras
+#finalmente densidad
+ggplot(data=diamonds, aes(x=price, group=cut, fill=cut)) +
+  geom_density(adjust=1.5) +
+  theme_ipsum() +
+  facet_wrap(~cut) +
+  theme(
+    legend.position="none",
+    panel.spacing = unit(0.1, "lines"),
+    axis.ticks.x=element_blank()
+  )
+
